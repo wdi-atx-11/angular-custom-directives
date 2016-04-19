@@ -71,12 +71,7 @@ and end up with a reusable `<card></card>` component, maybe something like:
 
 ### Let's be organized!
 
-Rather than just throw this wherever, let's make a file dedicated just to that function. Clean code, yo.
-
-```
-touch js/cardView.js
-```
-
+Rather than just throw this wherever, let's add it to our existing app.js
 Of course, it could be named anything, but it's sort of a view, and it's definitely a card, so `cardView` felt right. Up to you.
 
 #### Directives are as easy as...
@@ -84,11 +79,12 @@ Of course, it could be named anything, but it's sort of a view, and it's definit
 Just like controllers, factories, anything else we've made in angular, the first line is a simple extension of `angular`:
 
 ```js
-angular.module('CardsAgainstAssembly')
+angular
+  .module('CardsAgainstAssembly')
   .directive('card', cardView);
 ```
 
-An important thing to point out: The first argument is the name of the directive and how you'll use it in your HTML; and remember, Angular converts `camelCase` to `snake-case` for us, so if you want to use `<secret-garden></secret-garden>` in your HTML, name your directive `.directive('secretGarden', myFunctionIHaventMadeYet)`.  Remember, in the official Angular docs it's called `ngClass` or `ngRepeat`, but in your HTML you use `ng-class` and `ng-repeat`.
+An important thing to point out: The first argument is the name of the directive and how you'll use it in your HTML; and remember, Angular converts `camelCase` to `snake-case` for us, so if you want to use `<secret-garden></secret-garden>` in your HTML, name your directive `.directive('secretGarden', myFunctionIHaventMadeYet)`.  
 
 #### Let's make a function!
 
@@ -107,17 +103,17 @@ Nothing fancy yet - we're just constructing an object. We'll put some specifics 
 
 You've got a couple interesting options when making your own directives. We'll go through them all, quickly, and you can play with them on your own in a bit.
 
-1. `directive.restrict`
-2. `directive.replace`
-3. `directive.template/templateUrl`
-4. `directive.scope`
+1. `restrict`
+2. `replace`
+3. `template/templateUrl`
+4. `scope`
 
-#### 1. `directive.restrict`
+#### 1. `restrict`
 
 While the name isn't obvious, the `restrict` option lets us decide what _kind_ of directive we want to make. It looks like this:
 
 ```js
-directive.restrict = 'EACM';
+restrict = 'EACM';
 ```
 
 - `E` is element. An HTML element, like `<card></card>`
@@ -131,18 +127,19 @@ For ours, let's play with just an element.
 
 ```js
 function cardView(){
-  var directive = {};
-  directive.restrict = 'E';
+  var directive = {
+    restrict = 'E'
+  };
   return directive;
 }
 ```
 
-#### 2. `directive.replace`
+#### 2. `replace`
 
 Replace is pretty straightforward. Should this directive replace the HTML? Do you want it to get rid of what's in the template & swap it out with the template we're going to make? Or add to it, and not remove the original. For example, replacing would mean:
 
 ```html
-<div ng-repeat="card in cards.all" >
+<div ng-repeat="card in cards.questions" >
   <card></card>
 </div>
 ```
@@ -150,7 +147,7 @@ Replace is pretty straightforward. Should this directive replace the HTML? Do yo
 Would actually render as:
 
 ```html
-<div ng-repeat="card in cards.all" >
+<div ng-repeat="card in cards.questions" >
   <div class='card'>
     <h4 class="card-title">{{question}}</h4>
     <h6>Cards Against Assembly</h6>
@@ -162,18 +159,19 @@ See, replaced. Let's say we like that for our example:
 
 ```js
 function cardView(){
-  var directive = {};
-  directive.restrict = 'E';
-  directive.replace = true;
+  var directive = {
+    restrict : 'E',
+    replace : true
+  };
   return directive;
 }
 ```
 
-#### 3. `directive.template/templateUrl`
+#### 3. `template/templateUrl`
 
-This is where our partial view comes in. Now, if it's a pretty tiny, self-contained directive, you can use `directive.template="Some javascript " + string + " concatenation";`
+This is where our partial view comes in. Now, if it's a pretty tiny, self-contained directive, you can use `template="Some javascript " + string + " concatenation";`
 
-But that easily starts getting ugly, so it's often better (even for small directives like this) to make a quick little partial HTML file and reference it with `directive.templateUrl=` instead.
+But that easily starts getting ugly, so it's often better (even for small directives like this) to make a quick little partial HTML file and reference it with `templateUrl=` instead.
 
 Let's extract our existing card tags, and throw them in a partial. Cut out:
 
@@ -194,17 +192,16 @@ Quickly `touch _cardView.html` or some similarly obvious-named partial, and past
 </div>
 ```
 
-In `js/cardView.js`, we can add our option:
+In `js/app.js`, we can add our option:
 
 ```js
 function cardView(){
-  var directive = {};
-
-  //'A' == attribute, 'E' == element, 'C' == class
-  directive.restrict = 'E';
-  directive.replace = true;
-  directive.templateUrl =  "_cardView.html";
-
+  var directive = {
+    //'A' == attribute, 'E' == element, 'C' == class, 'M' == comment
+    restrict : 'E',
+    replace : true,
+    templateUrl :  "_cardView.html"
+  };
   return directive;
 }
 ```
@@ -213,7 +210,7 @@ And lastly, in our `index.html`, let's finally use our custom directive. So exci
 
 ```html
 <!-- index.html -->
-<div class='col-sm-6 col-md-6 col-lg-4' ng-repeat="card in cards.all" >
+<div class='col-sm-6 col-md-6 col-lg-4' ng-repeat="card in cards.questions" >
   <card></card>
 </div>
 ```
@@ -224,15 +221,15 @@ TRY IT! So awesome! We've now got this much more readable `index.html`, with a _
 
 This is awesome. This is a great, reusable component. Except for _one_ thing.
 
-#### 4. `directive.scope`
+#### 4. `scope`
 
-If you notice, our template uses ``{{card.question}}`` inside it. This obviously works perfectly - we're geniuses. But what if we wanted to render a card somewhere outside of that `ng-repeat`, where `card in cards.all` isn't a thing. What if we want to render a one-off card, reusing our awesome new directive elsewhere? Isn't that part of the point?
+If you notice, our template uses ``{{card.question}}`` inside it. This obviously works perfectly - we're geniuses. But what if we wanted to render a card somewhere outside of that `ng-repeat`, where `card in cards.questions` isn't a thing. What if we want to render a one-off card, reusing our awesome new directive elsewhere? Isn't that part of the point?
 
 It sure is. We're lacking a precise scope.
 
 Just like controllers, we want to define what our scope is. We want to be able to say "Render a card, with these details, in whatever context I need to render it in." A card shouldn't rely on a controller's data to know what information to render inside it. The controller should pass that data to our directive, so it's freestanding and not relying on anyone but itself.
 
-That's where `directive.scope` comes in, and this lets us decide what attributes our element should have! For example, in our card example, maybe we want to render a card with just a string somewhere outside of this controller. We want to make our own card with our own hardcoded text.
+That's where `scope` comes in, and this lets us decide what attributes our element should have! For example, in our card example, maybe we want to render a card with just a string somewhere outside of this controller. We want to make our own card with our own hardcoded text.
 
 Try this. In your `index.html`, adjust our `<card>` element to say:
 
@@ -255,34 +252,34 @@ In our `_cardView.html` partial, let's adjust to:
 
 No longer reliant on a variable named `card`, it's now just reliant on an element having the attribute of `question`.
 
-And finally, in `js/cardView.js`:
+And finally, in `js/app.js`:
 
 ```js
-angular.module('CardsAgainstAssembly')
+angular
+  .module('CardsAgainstAssembly',[])
   .directive('card', cardView);
 
 function cardView(){
-  var directive = {};
-
-  //'A' == attribute, 'E' == element, 'C' == class
-  directive.restrict = 'E';
-  directive.replace = true;
-  directive.templateUrl =  "_cardView.html";
-  directive.scope = {
-      question: '@'
+  var directive = {
+    //'A' == attribute, 'E' == element, 'C' == class, 'M' == comment
+    restrict : 'E',
+    replace : true,
+    templateUrl :  "_cardView.html",
+    scope : {
+        question: '@'
+    }
   };
-
   return directive;
 }
 ```
 
-In `directive.scope`, we just define an object. The key is whatever want the attribute on the element to be named. So if we want `<card bagel=""></card>`, then we'd need a key named `bagel` in our scope object.
+In `scope`, we just define an object. The key is whatever want the attribute on the element to be named. So if we want `<card bagel=""></card>`, then we'd need a key named `bagel` in our scope object.
 
 #### The Different Types of Scope for a Directive
 The _value_ is one of 3 options.
 
 ```js
-directive.scope: {
+scope: {
   ngModel: '=',     // Bind the ngModel to the object given
   onSend: '&',      // Pass a reference to the method
   fromName: '@'     // Store the string associated by fromName
@@ -336,7 +333,7 @@ Our goal is to craft a custom directive to show off our players scores, like so:
 
 <img width="965" alt="Scores" src="https://cloud.githubusercontent.com/assets/25366/9669340/3b316dc0-523b-11e5-8e7d-036a8a140d7e.png">
 
-As a pair, build a custom directive that makes use of the `playersController` included in your starter code, listing out each player & their score, built as a custom `<score></score>` directive.
+As a pair, build a custom directive that makes use of the `PlayersController` included in your starter code, listing out each player & their score, built as a custom `<score></score>` directive.
 
 You have 15 minutes! Go!
 
