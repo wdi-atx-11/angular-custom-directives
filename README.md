@@ -128,7 +128,7 @@ For ours, let's play with just an element.
 ```js
 function CardViewDirective(){
   var directive = {
-    restrict = 'E'
+    restrict : 'E'
   };
   return directive;
 }
