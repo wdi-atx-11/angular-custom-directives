@@ -81,7 +81,7 @@ Just like controllers, factories, anything else we've made in angular, the first
 ```js
 angular
   .module('CardsAgainstAssembly')
-  .directive('card', cardView);
+  .directive('card', CardViewDirective);
 ```
 
 An important thing to point out: The first argument is the name of the directive and how you'll use it in your HTML; and remember, Angular converts `camelCase` to `snake-case` for us, so if you want to use `<secret-garden></secret-garden>` in your HTML, name your directive `.directive('secretGarden', myFunctionIHaventMadeYet)`.  
@@ -91,7 +91,7 @@ An important thing to point out: The first argument is the name of the directive
 Now, we obviously need a function named `cardView`!
 
 ```js
-function cardView(){
+function CardViewDirective(){
   var directive = {};
   return directive;
 }
@@ -126,7 +126,7 @@ You can choose to have just one, all of the above, or any combination you like. 
 For ours, let's play with just an element.
 
 ```js
-function cardView(){
+function CardViewDirective(){
   var directive = {
     restrict = 'E'
   };
@@ -158,7 +158,7 @@ Would actually render as:
 See, replaced. Let's say we like that for our example:
 
 ```js
-function cardView(){
+function CardViewDirective(){
   var directive = {
     restrict : 'E',
     replace : true
@@ -185,7 +185,7 @@ Let's extract our existing card tags, and throw them in a partial. Cut out:
 Quickly `touch _cardView.html` or some similarly obvious-named partial, and paste it back in.
 
 ```html
-<!-- app/_cardView.html -->
+<!-- app/templates/_cardView.html -->
 <div class='card'>
   <h4 class="card-title">{{card.question}}</h4>
   <h6>Cards Against Assembly</h6>
@@ -195,7 +195,7 @@ Quickly `touch _cardView.html` or some similarly obvious-named partial, and past
 In `js/app.js`, we can add our option:
 
 ```js
-function cardView(){
+function CardViewDirective  (){
   var directive = {
     //'A' == attribute, 'E' == element, 'C' == class, 'M' == comment
     restrict : 'E',
@@ -257,9 +257,9 @@ And finally, in `js/app.js`:
 ```js
 angular
   .module('CardsAgainstAssembly',[])
-  .directive('card', cardView);
+  .directive('card', CardViewDirective);
 
-function cardView(){
+function CardViewDirective(){
   var directive = {
     //'A' == attribute, 'E' == element, 'C' == class, 'M' == comment
     restrict : 'E',

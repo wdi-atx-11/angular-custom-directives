@@ -2,8 +2,8 @@ angular
   .module('CardsAgainstAssembly', [])
   .controller('CardsController', CardsController)
   .controller('PlayersController', PlayersController)
-  .directive('card', cardViewDirective)
-  .directive('scores', scoresDirective);
+  .directive('card', CardViewDirective)
+  .directive('scores', ScoresDirective);
 
 function CardsController() {
   var vm = this;
@@ -17,7 +17,7 @@ function CardsController() {
   ];
 }
 
-function cardViewDirective() {
+function CardViewDirective() {
   var directive = {
     controllerAs: 'vm',
     controller: CardsController,
@@ -46,7 +46,7 @@ function PlayersController(){
 }
 
 
-function scoresDirective(){
+function ScoresDirective(){
   var directive = {
     controller: PlayersController,
     controllerAs: 'vm',
