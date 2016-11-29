@@ -80,7 +80,7 @@ Just like controllers, factories, anything else we've made in angular, the first
 
 ```js
 angular
-  .module('CardsAgainstAssembly')
+  .module('CardsAgainstAssembly', [])
   .directive('card', CardViewDirective);
 ```
 
