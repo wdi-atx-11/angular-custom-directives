@@ -6,6 +6,7 @@ angular
   .directive('scores', ScoresDirective);
 
 function CardsController() {
+  console.log("blarg");
   var vm = this;
   vm.questions = [
     {question: "What is Batman's guilty pleasure?"},
@@ -55,7 +56,5 @@ function ScoresDirective(){
     replace : true,
     templateUrl :  "./templates/_scoresView.html"
   };
-
-
   return directive;
 }
