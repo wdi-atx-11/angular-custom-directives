@@ -29,7 +29,7 @@ As an example, we're going to mess around with duplicating something that's beco
 
 Everyone's favorite CSS framework, Bootstrap, is even on board, where in [version 4+ you're able to create a card](http://v4-alpha.getbootstrap.com/components/card/) with just some CSS classes:
 
-<img width="346" alt="Bootstrap" src="https://cloud.githubusercontent.com/assets/25366/9665376/c2bcac6c-5224-11e5-8e4c-807a19a4432a.png">
+<img width="500" alt="Bootstrap" src="screenshot.png">
 
 Let's see if we can make something similar, wrapped up in our own custom HTML element.
 
