@@ -29,7 +29,7 @@ As an example, we're going to mess around with duplicating something that's beco
 
 Everyone's favorite CSS framework, Bootstrap, is even on board, where in [version 4+ you're able to create a card](http://v4-alpha.getbootstrap.com/components/card/) with just some CSS classes:
 
-<img width="500" alt="Bootstrap" src="screenshot.png">
+<img width="346" alt="Bootstrap" src="https://cloud.githubusercontent.com/assets/25366/9665376/c2bcac6c-5224-11e5-8e4c-807a19a4432a.png">
 
 Let's see if we can make something similar, wrapped up in our own custom HTML element.
 
@@ -51,7 +51,7 @@ Take five minutes and inspect our starter code in this repo's `starter-code/app/
 
 _Note: if you are going to run this code locally on Chrome, you'll need to run `npm init` and then install [http-server](https://www.npmjs.com/package/http-server) with `npm install http-server -g`. To run locally, simply use the command `http-server`._
 
-<img width="965" alt="Cards Against Assembly" src="https://cloud.githubusercontent.com/assets/25366/9666972/05a2f348-522e-11e5-8f6c-7c503032eff4.png">
+<img width="965" alt="Cards Against Assembly" src="screenshot.png">
 
 
 ## Building a Simple Directive - Codealong (15 mins)
