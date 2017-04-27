@@ -15,11 +15,11 @@
 
 As you've seen by now, a huge amount of the code you work with in Angular are directives. Angular was designed to be an extension of HTML - a way to have custom-defined interactive tags of your own making.
 
-While we've been getting good at using the directives that come with Angular, it's time to start seeing what we can do if we start making some up.
+While we've been getting good at using the directives that come with Angular, it's time to start seeing what we can do if we start building our own custom directives.
 
-One of the most obvious _uses_ of this is when you've got repetitive code to render some information or data. If you're using a bunch of tags all over the place, it's a simple DRY principle – you might forget a tag or decide to change something and have to change it in a million places.
+One of the most obvious _uses_ of this is when you've got repetitive code to render some information or data - when you have a repeated **component** somewhere within your site. If you're using a single component (and all of its associated HTML) repetitively in your views, it's a simple DRY principle – gather that view and funcitonality so that it's all written together in one place.
 
-By extracting it to a custom directive, we can just reference that directive whenever we need to use it and not worry about repeating the code to render it.
+By extracting a component to a custom directive, we can just reference that directive whenever we need to use the component and avoid repeating the code to render it.
 
 #### Real World Example
 
