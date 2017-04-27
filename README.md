@@ -35,7 +35,7 @@ Let's see if we can make something similar, wrapped up in our own custom HTML el
 
 But first:
 
-## Find a component on the web
+### Find a component on the web
 
 Let's take a moment to look at our favorite websites and see if we can find any pieces of a webpage that seem like they could be captured as a component.
 
