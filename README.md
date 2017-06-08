@@ -15,7 +15,7 @@
 
 As you've seen by now, a huge amount of the code you work with in Angular are directives. Angular was designed to be an extension of HTML - a way to have custom-defined interactive tags of your own making.
 
-While we've been getting good at using the directives that come with Angular, it's time to start seeing what we can do if we start building our own custom directives.
+While we've been getting good at using the directives that come with Angular, it's time to start seeing what we can do if we start building our own [custom directives](https://docs.angularjs.org/guide/directive).
 
 One of the most obvious _uses_ of this is when you've got repetitive code to render some information or data - when you have a repeated **component** somewhere within your site. If you're using a single component (and all of its associated HTML) repetitively in your views, it's a simple DRY principle – gather that view and funcitonality so that it's all written together in one place.
 
@@ -337,7 +337,7 @@ If you didn't notice, there's some extra code included in your starter `index.ht
 </header>
 ```
 
-Our goal is to craft a custom directive to show off our players scores, like so:
+Our goal is to craft a [custom directives](https://docs.angularjs.org/guide/directive) to show off our players scores, like so:
 
 <img width="965" alt="Scores" src="https://cloud.githubusercontent.com/assets/25366/9669340/3b316dc0-523b-11e5-8e7d-036a8a140d7e.png">
 
@@ -349,3 +349,6 @@ You have 15 minutes! Go!
 - Where can you imagine using custom directives?
 - What four types of directives can you make?
 - How do you pass information into a custom directive?
+
+## Resources
+- [Custom Directives](https://docs.angularjs.org/guide/directive)
